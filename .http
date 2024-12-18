@@ -44,8 +44,9 @@ Content-Type: application/json
 }
 
 ###
-@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjM0NDI4NWFlYTNhY2M4NjQ0OGY1NCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDU1ODgxMywiZXhwIjoxNzM0NTYyNDEzfQ.NePhAwMwA13EIZWEMdu-ZNTnn9pmbdthDoWdgQ45CiY
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjM0NDI4NWFlYTNhY2M4NjQ0OGY1NCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDU2NTQ1NywiZXhwIjoxNzM0NTY5MDU3fQ.aPMD_29zxckSttxaw0FobJ3u7o0qsIDkKNx656Z9Mpc
 @userToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjM0MzUxNWFlYTNhY2M4NjQ0OGY1MCIsInJvbGUiOiJyZWd1bGFyIiwiaWF0IjoxNzM0NTU4ODUwLCJleHAiOjE3MzQ1NjI0NTB9.KnTUVLwz35O7OSfRuhUUX6R8rSaWbIieNrw5c6iJjqI
+@invalidToken = 123456
 
 ###
 POST http://localhost:3000/items
@@ -62,6 +63,18 @@ Content-Type: application/json
 POST http://localhost:3000/items
 Content-Type: application/json
 Authorization: Bearer {{userToken}}
+
+{
+    "id": 1,
+    "title": "Eating",
+    "date": "2024-12-28 12:00:00",
+    "location": "Home"
+}
+
+###
+POST http://localhost:3000/items
+Content-Type: application/json
+Authorization: Bearer {{invalidToken}}
 
 {
     "id": 1,
@@ -114,6 +127,15 @@ Authorization: Bearer {{userToken}}
 ###
 PUT http://localhost:3000/items/1
 Content-Type: application/json
+Authorization: Bearer {{invalidToken}}
+
+{
+    "location": "Restaurant"
+}
+
+###
+PUT http://localhost:3000/items/1
+Content-Type: application/json
 Authorization: Bearer {{adminToken}}
 
 {
@@ -123,6 +145,14 @@ Authorization: Bearer {{adminToken}}
 ###
 GET http://localhost:3000/items
 Content-Type: application/json
+
+
+
+###
+GET http://localhost:3000/items
+Content-Type: application/json
+Authorization: Bearer {{invalidToken}}
+
 
 
 ###
@@ -186,3 +216,8 @@ Content-Type: application/json
 DELETE http://localhost:3000/items/2
 Content-Type: application/json
 Authorization: Bearer {{userToken}}
+
+###
+DELETE http://localhost:3000/items/2
+Content-Type: application/json
+Authorization: Bearer {{invalidToken}}
