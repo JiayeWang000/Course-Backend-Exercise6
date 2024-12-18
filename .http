@@ -1,0 +1,188 @@
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username": "user1",
+    "role": "regular"
+}
+###
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username": "user1",
+    "password": "user123",
+    "role": "regular"
+}
+
+###
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username": "admin1",
+    "password": "admin123",
+    "role": "admin"
+}
+
+###
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin1",
+    "password": "admin123"
+}
+
+###
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "username": "user1",
+    "password": "user123"
+}
+
+###
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjM0NDI4NWFlYTNhY2M4NjQ0OGY1NCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDU1ODgxMywiZXhwIjoxNzM0NTYyNDEzfQ.NePhAwMwA13EIZWEMdu-ZNTnn9pmbdthDoWdgQ45CiY
+@userToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjM0MzUxNWFlYTNhY2M4NjQ0OGY1MCIsInJvbGUiOiJyZWd1bGFyIiwiaWF0IjoxNzM0NTU4ODUwLCJleHAiOjE3MzQ1NjI0NTB9.KnTUVLwz35O7OSfRuhUUX6R8rSaWbIieNrw5c6iJjqI
+
+###
+POST http://localhost:3000/items
+Content-Type: application/json
+
+{
+    "id": 1,
+    "title": "Eating",
+    "date": "2024-12-28 12:00:00",
+    "location": "Home"
+}
+
+###
+POST http://localhost:3000/items
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+
+{
+    "id": 1,
+    "title": "Eating",
+    "date": "2024-12-28 12:00:00",
+    "location": "Home"
+}
+
+###
+POST http://localhost:3000/items
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id": 1,
+    "title": "Eating",
+    "date": "2024-12-28 12:00:00",
+    "location": "Home"
+}
+
+
+###
+POST http://localhost:3000/items
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id": 2,
+    "date": "2024-12-27 10:00:00",
+    "location": "Home"
+}
+
+###
+PUT http://localhost:3000/items/1
+Content-Type: application/json
+
+{
+    "location": "Restaurant"
+}
+
+###
+PUT http://localhost:3000/items/1
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+
+{
+    "location": "Restaurant"
+}
+
+###
+PUT http://localhost:3000/items/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "location": "Restaurant"
+}
+
+###
+GET http://localhost:3000/items
+Content-Type: application/json
+
+
+###
+GET http://localhost:3000/items
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+
+
+
+
+###
+POST http://localhost:3000/items
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id": 2,
+    "title": "Sleeping",
+    "date": "2024-12-27 00:00:00",
+    "location": "Home"
+}
+
+
+###
+POST http://localhost:3000/items
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id": 3,
+    "title": "Coding",
+    "date": "2024-12-29 10:00:00",
+    "location": "Home"
+}
+
+
+
+###
+GET http://localhost:3000/items/2
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+
+
+
+###
+GET http://localhost:3000/items?location=Home
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
+
+
+###
+DELETE http://localhost:3000/items/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+###
+DELETE http://localhost:3000/items/2
+Content-Type: application/json
+
+###
+DELETE http://localhost:3000/items/2
+Content-Type: application/json
+Authorization: Bearer {{userToken}}
